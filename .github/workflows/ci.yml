@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  build-and-check:
+  exercise-1-lets-start:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +17,7 @@ jobs:
           printf '%s\n' "$output"
           [[ "$output" == *llo* ]]
 
-  sum-data:
+  exercise-2-input-and-output:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
