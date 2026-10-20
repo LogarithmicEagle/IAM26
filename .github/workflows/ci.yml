@@ -1,0 +1,30 @@
+name: C++ CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile hallo.cc
+        run: g++ -std=c++17 -Wall -Wextra -Werror hallo.cc -o hallo
+      - name: Check program output
+        run: |
+          output="$(./hallo)"
+          printf '%s\n' "$output"
+          [[ "$output" == *llo* ]]
+
+  sum-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile summieren.cc
+        run: g++ -std=c++17 -Wall -Wextra -Werror summieren.cc -o summieren
+      - name: Generate and validate row sums
+        run: |
+          ./summieren
+          awk '{ print $1 + $2 }' daten.txt > expected.txt
+          diff -u expected.txt datensumme.txt

@@ -1,3 +1,3 @@
-# Uebung1
+# Exercise 1
 
-Dies ist das Repository für die ersten Aufgaben des ABK-C++-Kurs.
+This repository contains the first assignments for the ABK C++ course.
