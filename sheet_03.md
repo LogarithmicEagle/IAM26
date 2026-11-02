@@ -1,6 +1,6 @@
 # Instrumentation and Analysis Methods – Exercise Sheet 3
 
-**Handout:** 4th Nov 2026 **Due:** 25th Nov 2026
+**Handout:** 4th Nov 2026 **Due:** 18th Nov 2026
 
 ## Exercise 1: Poisson distribution (8 points)
 
