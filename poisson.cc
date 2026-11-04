@@ -5,6 +5,8 @@
 int main() {
   std::vector<int> counts(11, 0); // Index i is number of i in sums
   std::ifstream fin("sums.txt");
+  std::ofstream fout("hist.txt");
+  
   double n_read;
   int N = 0;
   int sum = 0;
@@ -24,6 +26,7 @@ int main() {
 
   for (long unsigned int i=0; i<counts.size(); i++) {
     std::cout << "Number " << i << ": " << counts.at(i) << std::endl;
+    fout << i << " " << counts.at(i) << std::endl;
   }
 
   fin.close();
