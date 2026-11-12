@@ -27,6 +27,21 @@ double nll(const std::vector<int>& data, double mu) {
   return -2 * res;
 }
 
+double satmodel(const std::vector<int>& data, double mu) {
+  double res1 = 0;
+  double res2 = 0;
+
+  for (int k : data) {
+    res1 += log(poisson(mu, k));
+
+    if (k != 0) {
+      res2 += log(poisson(k, k));
+    }
+  }
+
+  return -2 * (res1 - res2);
+}
+
 int main() {
   std::ifstream fin("sums.txt");
   std::ofstream fout("likelihood.txt");
@@ -74,6 +89,11 @@ int main() {
 
   std::cout << "Minimized mu: " << min_mu << std::endl;
   std::cout << "Maximized Liklihood: " << max_l << std::endl;
+
+  double satmod = satmodel(data, min_mu);
+  
+  std::cout << "-2ln lambda: " << satmod << std::endl;
+  std::cout << "z: " << (satmod - 233) / sqrt(2 * 233) << std::endl;
 
   fin.close();
   fout.close();
