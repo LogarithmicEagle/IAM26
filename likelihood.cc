@@ -63,11 +63,11 @@ int main() {
     fout << mu << " " << prob(data, mu) << std::endl;
   }
 
-  for (double mu = 0.01; mu < 6.; mu += 0.01) {
+  for (double mu = 0.; mu < 6.; mu += 0.01) {
     fout2 << mu << " " << nll(data, mu) << std::endl;
   }
 
-  for (double mu = 0.01; mu < 6.; mu += 0.01) {
+  for (double mu = 0.; mu < 6.; mu += 0.01) {
     fout3 << mu << " " << nll(data, mu) + 2 * log(L) << std::endl;
   }
 
