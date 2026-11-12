@@ -19,6 +19,7 @@ double prob(const std::vector<int>& data, double mu) {
 
 int main() {
   std::ifstream fin("sums.txt");
+  std::ofstream fout("likelihood.txt");
   std::vector<int> data;
   int num;
 
@@ -31,5 +32,10 @@ int main() {
 
   std::cout << "L(mu) = " << L << std::endl;
 
+  for (double mu = 0.; mu <= 6.; mu += 0.01) {
+    fout << mu << " " << prob(data, mu) << std::endl;
+  }
+
   fin.close();
+  fout.close();
 }
