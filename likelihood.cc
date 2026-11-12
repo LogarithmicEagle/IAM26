@@ -17,9 +17,20 @@ double prob(const std::vector<int>& data, double mu) {
   return L;
 }
 
+double nll(const std::vector<int>& data, double mu) {
+  double res = 0.;
+
+  for (int k : data) {
+    res += log(poisson(mu, k));
+  }
+
+  return -2 * res;
+}
+
 int main() {
   std::ifstream fin("sums.txt");
   std::ofstream fout("likelihood.txt");
+  std::ofstream fout2("nll.txt");
   std::vector<int> data;
   int num;
 
@@ -36,6 +47,11 @@ int main() {
     fout << mu << " " << prob(data, mu) << std::endl;
   }
 
+  for (double mu = 0.01; mu < 6.; mu += 0.01) {
+    fout2 << mu << " " << nll(data, mu) << std::endl;
+  }
+
   fin.close();
   fout.close();
+  fout2.close();
 }
