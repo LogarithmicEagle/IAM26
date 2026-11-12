@@ -31,6 +31,7 @@ int main() {
   std::ifstream fin("sums.txt");
   std::ofstream fout("likelihood.txt");
   std::ofstream fout2("nll.txt");
+  std::ofstream fout3("deltanll.txt");
   std::vector<int> data;
   int num;
 
@@ -51,7 +52,31 @@ int main() {
     fout2 << mu << " " << nll(data, mu) << std::endl;
   }
 
+  for (double mu = 0.01; mu < 6.; mu += 0.01) {
+    fout3 << mu << " " << nll(data, mu) + 2 * log(L) << std::endl;
+  }
+
+  double min_mu;
+  double min_nll = nll(data, 2.5);
+  double max_l;
+
+  for (double mu = 2.5; mu < 4.0; mu += 0.00001) {
+    double nll_val = nll(data, mu);
+
+    if (nll_val > min_nll) {
+      min_mu = mu - 0.00001;
+      max_l = prob(data, min_mu);
+      break;
+    }
+
+    min_nll = nll_val;
+  }
+
+  std::cout << "Minimized mu: " << min_mu << std::endl;
+  std::cout << "Maximized Liklihood: " << max_l << std::endl;
+
   fin.close();
   fout.close();
   fout2.close();
+  fout3.close();
 }
